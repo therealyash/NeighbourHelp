@@ -1,0 +1,67 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}NeighborHelp - Volunteer & Make a Difference{% endblock title %}
+
+{% block content %}
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    table {
+        width: 100%;
+        margin-top: 20px;
+    }
+    th, td {
+        text-align: center;
+        vertical-align: middle;
+    }
+</style>
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 40px 20px;">
+    <h2 style="margin-top: 20px;" style="color:black; font-weight: 800;">Volunteer Dashboard</h2>
+
+    {% if user.is_authenticated %}
+        <p> Below are the tasks tasks. Click on accept to accept to complete the task.</p>
+
+        <!--  *** Add Dashboard Code here ***-->
+        <table class="table table-bordered table-striped table-hover">
+            <thead style="background-color: #03cb9d; color: white;">
+                <tr>
+                    <th>Title</th>
+                    <th>Work Description</th>
+                    <th>Pincode</th>
+                    <th>Task Type</th>
+                    <th>Action </th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.work_description }}</td>
+                    <td>{{ task.pincode }}</td>
+                    <td>{{ task.task_type }}</td>
+                    <td>
+                        {% if task.status == 'pending' %}
+                            <a href="{% url 'pages:accept_task' task.id %}" class="btn btn-success">Accept</a>
+                        {% elif task.status == 'accepted' %}
+                            <a href="{% url 'pages:decline_task' task.id %}" class="btn btn-danger">Decline</a>
+                        {% elif task.status == 'declined' %}
+                            <a href="{% url 'pages:accept_task' task.id %}" class="btn btn-success">Accept</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center">No tasks available</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+       
+    {% else %}
+        <p>Log In to view dashboard</p>
+    {% endif %}
+</div>
+{% endblock content %}

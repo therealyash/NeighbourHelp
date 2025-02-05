@@ -1,0 +1,137 @@
+{% extends '_base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block title %}Sign Up{% endblock title %}
+
+{% block content %}
+    
+        <h2 >Sign Up</h2>
+        <form method="post" class="form-signup">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <div style="color: white;">
+                <a href="{% url 'account_login' %}" class="forgot-password">Already have an account?</a></div>
+            <button type="submit" class="btn btn-primary btn-block">Sign Up</button>
+            
+        </form>
+    
+
+    <style>
+        /* General container settings */
+        body {
+            background-image: url("{% static 'assets/images/BG3.png' %}"); /* Change to your image path */
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            
+        }
+        
+        .container {
+            max-width: 400px; /* Reduced the width */
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #000000;
+            border-radius: 8px;
+            border: 2px solid #000000;/* Added black border */
+            box-shadow: 0 4px 10px rgba(128,128,128, 0.4);
+        }
+
+        .forgot-password {
+            font-size: 12px; /* Set a smaller font size */
+            display: block; /* Make it a block element */
+            text-align: right; /* Align text to the right */
+            color: #ffffff; /* Optional: Change the color to match the button */
+            text-decoration: none; /* Optional: Remove underline */
+        }
+
+        .forgot-password:hover {
+            color: #03cb9d;
+            text-decoration: underline; /* Optional: Add underline on hover */
+        }
+
+        /* Header styling */
+        h2 {
+            color: #ffffff;
+            font-size: 32px;
+            margin-bottom: 30px;
+            font-weight: bold;
+        }
+
+        /* Form group with labels and inputs */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label{
+            color: white;
+        }
+
+        .form-label {
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;   
+        }
+
+        .form-control {
+            padding: 14px;
+            font-size: 16px;
+            border: 1px solid #333; /* Changed border color to black */
+            border-radius: 8px;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        .form-control:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        /* Button styling */
+        .btn-primary {
+            background-color: #03cb9d;
+            color: white;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 50px;
+            border: none;
+            transition: background-color 0.3s;
+            margin-bottom: 25px;
+            width: 35%;
+            margin: 0 auto;
+            margin-top: 40px;
+        }
+
+        .btn-primary:hover {
+            background-color: black;
+            border: 4px solid #03cb9d;            
+        }
+
+        /* Error messages */
+        .invalid-feedback {
+            color: #e74c3c;
+            font-size: 14px;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 767px) {
+            .container {
+                padding: 15px;
+            }
+
+            h2 {
+                font-size: 28px;
+            }
+
+            .form-control {
+                padding: 12px;
+            }
+
+            .btn-primary {
+                font-size: 16px;
+                padding: 12px;
+            }
+        }
+    </style>
+{% endblock content %}

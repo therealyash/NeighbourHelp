@@ -1,0 +1,108 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}NeighborHelp - Volunteer & Make a Difference{% endblock title %}
+
+{% block content %}
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 40px 20px;">
+    <!-- <h1 style="font-weight: bold; font-size: 28px; margin-bottom: 10px;">NeighborHelp</h1> -->
+    <h2 style="margin-top: 20px;">Welcome to NeighborHelp</h2>
+    <!-- <h3 style="color: #555;"></h3> -->
+
+    {% if user.is_authenticated %}
+        <h3>Hello, {{ user.username }} 👋</h3>
+        <p>Join us in making a difference. Browse volunteering opportunities or start your own initiative.</p>
+        
+        <!-- Cards -->
+        <div class="container">
+          <div class="row">
+              <!-- Card 1 -->
+              <div class="col-md-4 mb-4" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.056); border-radius: 10px;">
+                  <div class="card h-100"> <!-- Add h-100 to make all cards the same height -->
+                      <img src="{% static 'assets/images/create.png' %}" class="card-img-top" alt="Delivering Help Image">
+                      <div class="card-body text-left">
+                          <h5 class="card-title">Create Task</h5>
+                          <p class="card-text">Submit a request for assistance with a task in your community.</p>
+                          <div class="text-left">
+                            <a class="btn btn-outline-primary" href="{% url 'pages:createtask' %}">Create Tasks</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+      
+              <!-- Card 2 -->
+              <div class="col-md-4 mb-4" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.056); border-radius: 10px;">
+                  <div class="card h-100">
+                      <img src="{% static 'assets/images/test.png' %}" class="card-img-top" alt="Tasks Dashboard Image">
+                      <div class="card-body text-left">
+                          <h5 class="card-title">Tasks Dashboard</h5>
+                          <p class="card-text">View and manage your <br> submitted tasks.</p>
+                          <div class="text-left">
+                            <a class="btn btn-outline-primary" href="{% url 'pages:userDash' %}">View</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+      
+              <!-- Card 3 -->
+              <div class="col-md-4 mb-4" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.056); border-radius: 10px;">
+                  <div class="card h-100">
+                      <img src="{% static 'assets/images/vol.png' %}" class="card-img-top" alt="Volunteer Dashboard Image">
+                      <div class="card-body text-left">
+                          <h5 class="card-title">Volunteer Dashboard</h5>
+                          <p class="card-text">Work as a volunteer and <br/>manage tasks.</p>
+                          <div class="text-left">
+                            <a class="btn btn-outline-primary" href="{% url 'pages:volDash' %}">View</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+          
+        
+    {% else %}
+        <p>Connecting Volunteers with Communities. <br>Sign up today and start contributing to your community.</p>
+      <div class="d-flex">
+        <a class="btn btn-outline-primary me-4" href="{% url 'account_signup' %}">Sign Up</a>
+        <a class="btn-outline-primary" style="background: #03cb9d; padding: 9px 24px; font-weight:700; margin-left: 12px; " href="{% url 'account_login' %}">Log In</a>
+      </div>
+        <div style="margin-top: 20px;">
+            <img src="{% static 'assets/images/BG.png' %}" alt="Volunteering Illustration" style="max-width: 700px;">
+        </div>
+    {% endif %}
+    
+        <style>
+          .card-img-top {
+              object-fit: cover; /* Ensures the image covers the area without distortion */
+              height: 200px; /* Set a fixed height for the images */
+          }
+
+          .card {
+              display: flex;
+              flex-direction: column; /* Ensures the card body is below the image */
+          }
+
+          .card-body {
+              flex-grow: 1; /* Allows the card body to take up remaining space */
+          }
+
+          .btn-outline-primary {
+          color: white;
+          background: black;
+          border-radius: 50px;
+          border-color: black; 
+          font-weight: 600;
+          padding: 7px 21px;
+        }
+
+        .btn-outline-primary:hover{
+          background: #03cb9d;
+          border: none;
+        }
+        </style>
+
+
+    
+</div>
+{% endblock content %}

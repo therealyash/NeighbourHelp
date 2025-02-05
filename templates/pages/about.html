@@ -1,0 +1,37 @@
+{% extends '_base.html' %}
+
+{% load static %}
+
+{% block title %}About Us Page{% endblock %}
+
+{% block content %}
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 40px 20px;">
+    <!-- <h1 style="font-weight: bold; font-size: 28px; margin-bottom: 10px;">NeighborHelp</h1> -->
+    <h1 style="margin-top: 20px;">About Us</h2>
+    <div>
+            
+        <div class="container d-flex mt-3">
+            <div>
+                <img src="{% static 'assets/images/delivering_help.png' %}">
+            </div>
+            <div class="text-left ms-5 mt-5">
+                
+                <div style="font-size: larger;">
+                    At <b>NeighborHelp</b>,<br/> we aim to bridge the gap between those in need and those willing to help...
+                <br/><br>
+                    <strong>For Elderly Users:</strong>
+                    Easily submit requests for assistance, whether it's grocery shopping, medical appointments, or simple companionship.
+
+                    <br><br>
+                    <strong>For Volunteers:</strong>
+                    Sign up to lend a helping hand and make a meaningful difference in someone’s life.
+
+                    <br><br>
+                    Our mission is to foster a caring community where kindness and support are just a click away. 
+                    Join us in creating a world where no one has to face challenges alone.
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

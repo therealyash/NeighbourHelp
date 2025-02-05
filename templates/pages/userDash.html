@@ -1,0 +1,65 @@
+{% extends '_base.html' %}
+{% load static %}
+
+{% block title %}NeighborHelp - Volunteer & Make a Difference{% endblock title %}
+
+{% block content %}
+<head>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<style>
+    table {
+        width: 100%;
+        margin-top: 20px;
+    }
+    th, td {
+        text-align: center;
+        vertical-align: middle;
+    }
+</style>
+<div style="display: flex; flex-direction: column; align-items: center; text-align: center; padding: 40px 20px;">
+    <h2 style="margin-top: 20px;" style="color: black; font-weight: 800;">User Dashboard</h2>
+
+    {% if user.is_authenticated %}
+        <p> Below are the tasks you have requested for, you can delete them.</p>
+
+        <!--  *** Add Dashboard Code here ***-->
+        <table class="table table-bordered table-striped table-hover">
+            <thead style="background-color: #03cb9d; color: white;">
+                <tr>
+                    <th>Title</th>
+                    <th>Work Description</th>
+                    <th>Pincode</th>
+                    <th>Task Type</th>
+                    <th>Delete Task</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for task in tasks %}
+                <tr>
+                    <td>{{ task.title }}</td>
+                    <td>{{ task.work_description }}</td>
+                    <td>{{ task.pincode }}</td>
+                    <td>{{ task.task_type }}</td>
+                    <td>
+                        <!-- Wrap the delete button in a form that uses POST -->
+                        <form action="{% url 'pages:delete_task' task.id %}" method="POST">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-danger">DELETE</button>
+                        </form>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center">No tasks available</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+       
+    {% else %}
+        <p>Log In to view dashboard</p>
+    {% endif %}
+</div>
+{% endblock content %}
