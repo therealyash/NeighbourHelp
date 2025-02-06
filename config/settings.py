@@ -64,7 +64,7 @@ INTERNAL_IPS = [
 ]
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
-
+import os
 if DEBUG:
     DATABASES = {
         "default": {
