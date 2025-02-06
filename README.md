@@ -12,7 +12,7 @@ Neighbour Help is a community-driven Django web application that allows users to
 
 ## Demo
 ### Youtube
-https://youtu.be/6zlata0-bS0
+[![Watch the video on YouTube](https://img.youtube.com/vi/6zlata0-bS0/0.jpg)](https://youtu.be/6zlata0-bS0)
 
 ### Screenshots
 
