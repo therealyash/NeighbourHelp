@@ -40,8 +40,7 @@ Pillow>=8.4.0
 platformdirs==2.2.0
 pluggy==0.13.1
 prompt-toolkit==3.0.20
-# psycopg2-binary==2.9.1
-psycopg2-binary==2.9.1  # or whatever version you're using
+psycopg2==2.9.1
 whitenoise==6.7.0
 
 py==1.10.0
