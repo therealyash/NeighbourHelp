@@ -1,5 +1,6 @@
 from pathlib import Path
 from decouple import config
+import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -7,7 +8,7 @@ DEBUG = config("DEBUG", default="False").lower() == "true"
 SECRET_KEY = config("SECRET_KEY", default="secret")
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="*").split(",")
 
-# ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['.vercel.app', '127.0.0.1', 'now.sh']
 
 
 INSTALLED_APPS = [
@@ -64,23 +65,22 @@ INTERNAL_IPS = [
 ]
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 
-import os
-if DEBUG:
-    DATABASES = {
+# if DEBUG:
+#     DATABASES = {
+#         "default": {
+#             "ENGINE": "django.db.backends.sqlite3",
+#             "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+#         }
+#     }
+# else:
+DATABASES = {
         "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
-        }
-    }
-else:
-    DATABASES = {
-        "default": {
-            "ENGINE": "django.db.backends.postgresql_psycopg2",
-            "NAME": config("DATABASE_NAME", default=""),
-            "USER": config("DATABASE_USER", default=""),
-            "PASSWORD": config("DATABASE_PASSWORD", default=""),
-            "HOST": config("DATABASE_HOST", default=""),
-            "PORT": config("DATABASE_PORT", default=""),
+            "ENGINE": "django.db.backends.postgresql",
+            "NAME": config("DATABASE_NAME", default="railway"),
+            "USER": config("DATABASE_USER", default="postgres"),
+            "PASSWORD": config("DATABASE_PASSWORD", default="qKWzZFOFVMRrxWjlmhVPOBmtXpLDLEmt"),
+            "HOST": config("DATABASE_HOST", default="junction.proxy.rlwy.net"),
+            "PORT": config("DATABASE_PORT", default="51931"),
         }
     }
 
@@ -112,8 +112,14 @@ USE_L10N = True
 USE_TZ = True
 
 STATIC_URL = "/static/"
-STATICFILES_DIRS = (str(BASE_DIR.joinpath("static")),)
-STATIC_ROOT = str(BASE_DIR.joinpath("staticfiles"))
+
+# Directories where Django will look for static files (for development)
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+
+# Location where collected static files will be stored (for production)
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+# Static file finders
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
