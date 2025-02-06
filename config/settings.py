@@ -3,9 +3,9 @@ from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-DEBUG = config("DEBUG", default=True)
+DEBUG = config("DEBUG", default="False").lower() == "true"
 SECRET_KEY = config("SECRET_KEY", default="secret")
-ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="*")
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", default="*").split(",")
 
 # ALLOWED_HOSTS = ['*']
 
@@ -57,7 +57,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "config.wsgi.application"
+WSGI_APPLICATION = "NeighbourHelp.wsgi.application"
 SHELL_PLUS = "ipython"
 INTERNAL_IPS = [
     "127.0.0.1",
@@ -158,3 +158,9 @@ if not DEBUG:
     SECURE_HSTS_PRELOAD = True
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+    MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
+
+    STATIC_URL = "/static/"
+    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
